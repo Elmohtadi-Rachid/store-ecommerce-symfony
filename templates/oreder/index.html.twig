@@ -19,43 +19,42 @@
      <a href="{{path('Ajouter_product')}}"  class="btn btn-primary">Ajouter</a>
 </div>
 <div class="container rounded mt-5 bg-white p-md-5">
-    <div class="h2 font-weight-bold">Les Des Produits</div>
+    <div class="h2 font-weight-bold">my orders</div>
     <div class="table-responsive">
         <table class="table" style=" width :100% ">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">NAME</th>
-                    <th scope="col">DESCRIPTION</th>
-                    <th scope="col">PRIX</th>
-                    <th scope="col">QUANTITY</th>
-                    <th scope="col">CATEGORIES</th>
-                    <th scope="col">IMAGE</th>
-                    <th scope="col">ACTION</th>
+                    <th scope="col">product name</th>
+                    <th scope="col">price</th>
+                    <th scope="col">status</th>
+                    
                 </tr>
             </thead>
             <tbody>
-            {% for product in products %}
+            {% set sum = 0 %}
+            {% for order in usee.orders %}
+                 {% set sum = sum + order.price %}
                 <tr>
-                    <td class="pt-2">{{product.id}}</td>
-                    <td class="pt-3">{{product.name}}</td>
-                    <td class="pt-3">{{product.description}}</td>
-                    <td class="pt-3">{{product.price}}</td>
-                    <td class="pt-3">{{product.	quantity}}</td>
-                    <td class="pt-3">{{product.category.name}}</td>
+                    <td class="pt-2">{{order.id}}</td>
+                    <td class="pt-3">{{order.pname}}</td>
+                    <td class="pt-3">{{order.price}}</td>
                     <td class="pt-3">
-                        <img class="img" src="{{ asset('uplodes/' ~ product.image) }}" alt="">
-                    </td>
-                    <td>
-                    <a href="{{path('edite_product',{id: product.id})}}" class="btn btn-sm btn-warning">edite</a>
-                    </td>
-                    <td>
-                        <form id="{{product.id}}" action="{{path('delete_product',{id: product.id})}}"method = "POST" >
-                        </form>
-                        <button onclick="deleteItame({{product.id}})" class="btn btn-sm btn-danger">Delete</button>
-                    </td>
+                        {% if order.status == 'processing...' %}
+                            <span class="badge bg-dark p-2">{{order.status}}</span>
+                        {% elseif order.status == 'shipped' %}
+                             <span class="badge bg-success p-2">{{order.status}}</span>
+                        {% else  %}
+                            <span class="badge bg-danger p-2">{{order.status}}</span>
+                        {% endif %}
+                        </td>
+                
                 </tr>
-             {% endfor %}    
+             {% endfor %} 
+             <tr class = "text-center">
+                <th colspan ="3">Totale</th>
+                <td class ="fw-bold">{{ sum }}DH</td>
+             </tr>
             </tbody>
         </table>
     </div>

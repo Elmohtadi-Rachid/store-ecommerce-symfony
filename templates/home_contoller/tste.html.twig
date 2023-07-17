@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block title %}Create products{% endblock %}
+
+
+{% block body %}
+    <div class="row my-10">
+       <div class="col-md-6 mx-auto">
+            <div class="card">
+                 <div class="card-header">
+                    edite products
+                </div>
+                <div class="card-body">
+                   <table class="table" style=" width :100% ">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">NAME</th>
+                    <th scope="col">DESCRIPTION</th>
+                    <th scope="col">PRIX</th>
+                    <th scope="col">QUANTITY</th>
+                    <th scope="col">CATEGORIES</th>
+                    <th scope="col">IMAGE</th>
+                    <th scope="col">ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+               <tr>
+                    <td class="pt-2">{{products.id}}</td>
+                    <td class="pt-3">{{products.name}}</td>
+                    <td class="pt-3">{{products.description}}</td>
+                    <td class="pt-3">{{products.price}}</td>
+                    <td class="pt-3">{{products.quantity}}</td>
+                    <td class="pt-3">{{products.category.name}}</td>
+                  
+            </tbody>
+        </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
